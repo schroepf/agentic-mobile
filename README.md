@@ -8,7 +8,7 @@ A minimal Kotlin Multiplatform mobile starter app with a shared Compose Multipla
 
 ## Targets
 
-- Android 12 and higher (`minSdk = 31`)
+- Android 12.0 and higher (`minSdk = 31`, API 31+)
 - iOS 16 and higher
 
 ## Identifiers
