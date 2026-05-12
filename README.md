@@ -28,4 +28,4 @@ Open the project in Android Studio to run the Android app.
 
 ### iOS
 
-Open `/home/runner/work/agentic-mobile/agentic-mobile/iosApp/iosApp.xcodeproj` in Xcode and run the `iosApp` target on an iOS 16+ simulator or device.
+Open `iosApp/iosApp.xcodeproj` in Xcode and run the `iosApp` target on an iOS 16+ simulator or device.
