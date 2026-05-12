@@ -2,6 +2,10 @@
 
 A minimal Kotlin Multiplatform mobile starter app with a shared Compose Multiplatform UI for Android and iOS.
 
+## Preview
+
+![Agentic Mobile preview](images/agentic-mobile-preview.png)
+
 ## Targets
 
 - Android 12 and higher (`minSdk = 31`)
