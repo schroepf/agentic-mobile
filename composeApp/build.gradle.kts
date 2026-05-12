@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class)
+
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -10,7 +12,6 @@ plugins {
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
         }
@@ -27,6 +28,15 @@ kotlin {
         }
     }
 
+    swiftPMDependencies {
+        iosMinimumDeploymentTarget.set("16.0")
+        swiftPackage(
+            url = url("https://github.com/maplibre/maplibre-gl-native-distribution"),
+            version = from("6.26.0"),
+            products = listOf(product("MapLibre")),
+        )
+    }
+
     sourceSets {
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -34,6 +44,7 @@ kotlin {
             implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.maplibre.compose)
         }
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
