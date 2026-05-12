@@ -13,13 +13,19 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(path: "subpackages/_composeApp")
+    .package(
+      url: "https://github.com/maplibre/maplibre-gl-native-distribution",
+      from: "6.26.0"
+    )
   ],
   targets: [
     .target(
       name: "KotlinMultiplatformLinkedPackage",
       dependencies: [
-        .product(name: "_composeApp", package: "_composeApp")
+        .product(
+          name: "MapLibre",
+          package: "maplibre-gl-native-distribution"
+        )
       ]
     )
   ]
