@@ -2,12 +2,15 @@
 
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.compose.ExperimentalComposeLibrary
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.detekt)
+    id("com.android.compose.screenshot")
 }
 
 kotlin {
@@ -46,9 +49,18 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.maplibre.compose)
         }
+        @OptIn(ExperimentalComposeLibrary::class)
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation(compose.uiTest)
+        }
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.compose.ui.tooling.preview)
+        }
+        androidUnitTest.dependencies {
+            implementation(libs.androidx.compose.ui.test.junit4)
+            implementation(libs.junit)
         }
     }
 }
@@ -81,8 +93,17 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 dependencies {
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${libs.versions.detekt.get()}")
     debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
 }
