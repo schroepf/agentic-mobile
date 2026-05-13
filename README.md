@@ -25,3 +25,18 @@ Open the project in Android Studio to run the Android app.
 ### iOS
 
 Open `iosApp/iosApp.xcodeproj` in Xcode and run the `iosApp` target on an iOS 16+ simulator or device.
+
+## Quality checks
+
+```bash
+./gradlew detekt
+./gradlew :composeApp:allTests
+./gradlew :composeApp:connectedDebugAndroidTest
+./gradlew :composeApp:validateDebugScreenshotTest
+```
+
+To refresh Compose preview screenshot baselines for Android:
+
+```bash
+./gradlew :composeApp:updateDebugScreenshotTest
+```

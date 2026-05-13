@@ -1,8 +1,12 @@
 [versions]
 agp = "8.9.3"
 androidx-activityCompose = "1.10.1"
+androidx-testExtJunit = "1.2.1"
+androidx-testRunner = "1.6.2"
 androidx-ui-tooling = "1.7.8"
 compose-multiplatform = "1.10.3"
+detekt = "1.23.8"
+junit = "4.13.2"
 kotlin = "2.4.0-Beta2"
 maplibre-compose = "0.12.1"
 
@@ -10,10 +14,17 @@ maplibre-compose = "0.12.1"
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidx-ui-tooling" }
+androidx-compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "androidx-ui-tooling" }
+androidx-compose-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "androidx-ui-tooling" }
+androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-testExtJunit" }
+androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-testRunner" }
+junit = { module = "junit:junit", version.ref = "junit" }
+detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 maplibre-compose = { module = "org.maplibre.compose:maplibre-compose", version.ref = "maplibre-compose" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }

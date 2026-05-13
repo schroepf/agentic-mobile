@@ -8,6 +8,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.detekt)
+    id("com.android.compose.screenshot")
 }
 
 kotlin {
@@ -46,9 +48,18 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.maplibre.compose)
         }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+        }
         androidMain.dependencies {
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.compose.ui.tooling.preview)
+        }
+        androidInstrumentedTest.dependencies {
+            implementation(libs.androidx.compose.ui.test.junit4)
+            implementation(libs.androidx.test.ext.junit)
+            implementation(libs.androidx.test.runner)
+            implementation(libs.junit)
         }
     }
 }
@@ -63,6 +74,7 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     packaging {
@@ -81,8 +93,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    // Required by AGP's Compose preview screenshot plugin to register screenshot test tasks.
+    experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 dependencies {
+    detektPlugins(libs.detekt.formatting)
     debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+
+detekt {
+    buildUponDefaultConfig = true
+    allRules = false
 }
