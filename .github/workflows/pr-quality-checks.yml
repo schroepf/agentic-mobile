@@ -3,6 +3,9 @@ name: PR Quality Checks
 on:
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
   quality:
     runs-on: ubuntu-latest
@@ -21,3 +24,26 @@ jobs:
 
       - name: Run detekt and unit/screenshot tests
         run: ./gradlew detekt :composeApp:allTests :composeApp:validateDebugScreenshotTest
+
+  ui-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Run instrumented UI tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 35
+          arch: x86_64
+          profile: pixel_6
+          script: ./gradlew :composeApp:connectedDebugAndroidTest

@@ -31,6 +31,7 @@ Open `iosApp/iosApp.xcodeproj` in Xcode and run the `iosApp` target on an iOS 16
 ```bash
 ./gradlew detekt
 ./gradlew :composeApp:allTests
+./gradlew :composeApp:connectedDebugAndroidTest
 ./gradlew :composeApp:validateDebugScreenshotTest
 ```
 
